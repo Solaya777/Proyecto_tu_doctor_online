@@ -1,15 +1,18 @@
+import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react'
-import './App.css';
-
-import Content from './components/Content';
-
+import Index from './components/IndexWeb'
+import Login from './components/Login';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      <Content></Content>
-    </div>
+    <Router>
+    <Index/>
+    <Routes>
+      <Route path="/Login" element={<Login />} />
+    </Routes>
+  </Router>
   );
 }
 
