@@ -185,7 +185,7 @@ body{
     background-image: linear-gradient(
         rgb(0,0,0,0.7),
         rgb(0,0,0,0.7)),
-        url(../images/blog3.jpg);
+        url(../images/when.png);
 
         background-position:center bottom ;
         background-repeat: no-repeat;
@@ -230,7 +230,7 @@ body{
 
 .services-1 img {
     width: 100px; /* Ajusta el ancho según sea necesario */
-    height: auto; /* Mantiene la proporción */
+    height: 100px; /* Ajusta la altura según sea necesario */
     object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
     margin-bottom: 10px;
 }

@@ -4,6 +4,7 @@ import '../css/sweetalert.css';
 import '../css/bootstrap.min.css';
 import '../css/atlantis.min.css';
 import Bg from '../images/bg.svg';
+import prueba from '../images/calendar-icon.png';
 export default function Content() {
   return (
     <div>
