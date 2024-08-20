@@ -69,6 +69,11 @@ body{
     background-position: 65% 35%;
 }
 
+.logo img{
+    max-width: 150px;
+    height: auto; 
+}
+
 .menu {
     position: absolute;
     top: 0;
@@ -108,6 +113,7 @@ body{
     color: #FFFDFC;
     display: block;
     font-weight: 600;
+    font-family: 'Poppins', sans-serif;
 }
 
 .menu .navbar ul li a:hover {
@@ -134,16 +140,20 @@ body{
 .header-content h1{
     font-size: 75px;
     line-height: 80px;
-    color:#F9FAFC;
+    color:white;
     text-transform: uppercase;
     margin-bottom: 35px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
 .header-content p{
     font-size: 16px;
-    color:#C5C5C5;
+    color:white;
     padding: 0 250px;
     margin-bottom: 25px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
 .btn-1{
@@ -175,6 +185,8 @@ body{
     text-transform: uppercase;
     padding:0 250px;
     margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
 .txt-p{
@@ -212,6 +224,8 @@ body{
     color:black;
     font-size: 20px;
     margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
 .services{
@@ -238,6 +252,8 @@ body{
     color: #F9FAFC;
     text-transform: uppercase;
     margin-bottom: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 800;
 }
 
 .services-content p{
@@ -245,6 +261,8 @@ body{
     color:#C5C5C5;
     margin-bottom: 50px;
     padding: 0 100px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
 }
 
 .services-group {
@@ -272,6 +290,8 @@ body{
     color: #EACCB3;
     font-size: 18px;
     margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
 
@@ -311,8 +331,10 @@ h2{
 
 p{
     font-size: 16px;
-    color: #17181a;
+    color: #3a3d44;
     margin: 25px 0 45px 0;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
 .blog {
@@ -345,9 +367,17 @@ p{
     object-position: top;
 }
 
+.blog container h2{
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
 .blog-item h3 {
     font-size: 25px;
     color: #17181a;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    
 }
 
 .footer {
