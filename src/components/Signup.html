@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Registrate</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/sweetalert.css">
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/atlantis.min.css">
+</head>
+
+<body>
+  <div class="contenedor">
+    <div class="img">
+      <img src="path_to_images/bg.svg" alt="Background Image">
+    </div>
+    <div class="contenido-login">
+      <form id="formulario_registro">
+        <img src="path_to_images/logo.png" alt="Logo">
+        <h2>Registrate</h2>
+        <div class="input-div nit">
+          <div class="i">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="div">
+            <input type="email" name="name" required placeholder="NOMBRE">
+          </div>
+        </div>
+        <div class="input-div nit">
+          <div class="i">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="div">
+            <input type="email" name="email" required placeholder="CORREO">
+          </div>
+        </div>
+        <div class="input-div pass">
+          <div class="i">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="div">
+            <input type="password" placeholder="CONTRASEÑA" name="clave" required>
+          </div>
+        </div>
+        <div class="input-div pass">
+          <div class="i">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="div">
+            <input type="password" placeholder="CONFIRMAR CONTRASEÑA" name="clave2" required>
+          </div>
+        </div>
+        <div class="row" id="load" hidden>
+          <div class="col-xs-4 col-xs-offset-4 col-md-2 col-md-offset-5">
+            <img src="path_to_images/load.gif" width="100%" alt="Loading">
+          </div>
+          <div class="col-xs-12 center text-accent">
+            <span>Validando información...</span>
+          </div>
+        </div>
+        <input type="submit" name="button" id="registro" className="btn" value="Registrate" />
+      </form>
+    </div>
+  </div>
+
+  <!-- Js personalizado -->
+  <script src="path_to_js/custom.js"></script>
+</body>
+
+</html>

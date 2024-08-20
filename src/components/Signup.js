@@ -3,8 +3,55 @@ import '../css/style.css';
 import '../css/sweetalert.css';
 import '../css/bootstrap.min.css';
 import '../css/atlantis.min.css';
+import { useState } from 'react';
+import { useAuth } from '../auth/AuthProvider'
+import {Navigate} from 'react';
+import { useNavigate } from 'react-router-dom';
+import {API_URL} from '../auth/constants';
 
-export const Signup = () => {
+export default function Signup() {
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorResponse, setErrorResponse] = useState("");
+
+  const auth = useAuth();
+  const goTo = useNavigate();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`${API_URL}/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,
+          username,
+          password
+        })
+      });
+
+      if (response.ok) {
+        console.log("User created successfully");
+        setErrorResponse("");
+
+        goTo("/Login");
+      } else {
+        const json = await response.json();
+        setErrorResponse(json.body.error || "Unknown error occurred");
+      }
+    } catch (error) {
+      console.error("Error during fetch:", error);
+      setErrorResponse("Network error occurred");
+    }
+  }
+
+  if (auth.isAuthenticated) {
+    return <Navigate to="/AppointmentScheduling" />;
+  }
   return (
   
 <div>
@@ -20,15 +67,17 @@ export const Signup = () => {
       <img src="assets/img/bg.svg" alt="" />
     </div>
     <div className="contenido-login">
-      <form id="formulario_registro">
+      <form className="form" id="formulario_registro" onSubmit={handleSubmit} >
         <img src="assets/img/logo.png" alt=""/>
         <h2>Registrate</h2>
+        {!!errorResponse && <div className="errorMessage">{errorResponse}</div> }
         <div className="input-div nit">
           <div className="i">
             <i className="fas fa-user" />
           </div>
           <div className="div">
-            <input type="email" name="name" required placeholder="NOMBRE" />
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} 
+              name="name" required placeholder="Nombre" />
           </div>
         </div>
         <div className="input-div nit">
@@ -36,7 +85,7 @@ export const Signup = () => {
             <i className="fas fa-user" />
           </div>
           <div className="div">
-            <input type="email" name="email" required placeholder="CORREO" />
+            <input type="email" value={username} onChange={(e) => setUsername(e.target.value)} name="email" required placeholder="Correo" />
           </div>
         </div>
         <div className="input-div pass">
@@ -44,15 +93,7 @@ export const Signup = () => {
             <i className="fas fa-lock" />
           </div>
           <div className="div">
-            <input type="password" placeholder="CONTRASEÑA" name="clave" required />
-          </div>
-        </div>
-        <div className="input-div pass">
-          <div className="i">
-            <i className="fas fa-lock" />
-          </div>
-          <div className="div">
-            <input type="password" placeholder="CONFIRMAR CONTRASEÑA" name="clave2" required />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} name="password" required placeholder="Contraseña"  />
           </div>
         </div>
         <div className="row" id="load" hidden="hidden">
@@ -63,7 +104,7 @@ export const Signup = () => {
             <span>Validando información...</span>
           </div>
         </div>
-        <input type="button" name="button" id="registro" className="btn" defaultValue="Registrate" />
+        <input type="submit" name="button" id="registro" className="btn" value="Registrate" />
       </form>
     </div>
   </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../css/IndexWeb.css';
+import { Link } from 'react-router-dom';
 import menuIcon from '../images/menu.png';
 import generalMedicine from '../images/general_medicine.png';
 import pediatricsMedicine from '../images/pedriatics_medicine.png';
@@ -10,10 +11,20 @@ import checkedIcon from '../images/checked-icon.png';
 import blog1 from '../images/blog1.jpg';
 import blog2 from '../images/blog2.jpg';
 import blog3 from '../images/blog3.jpg';
+import { createGlobalStyle } from 'styled-components';
 
-const App = () => {
+const GlobalStyle = createGlobalStyle
+`@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+`;
+
+const IndexWeb = () => {
   return (
     <>
+    <GlobalStyle />
       <header className="header">
         <div className="menu container">
           <a href="#" className="logo">Logo</a>
@@ -25,8 +36,9 @@ const App = () => {
             <ul>
               <li><a href="#">Inicio</a></li>
               <li><a href="#">Servicios</a></li>
-              <li><a href="#">Registrate!</a></li>
-              <li><a href="#">Inicia sesión</a></li>
+              <li><a href="#">Acerca de nosotros </a></li>
+              <li><Link to="/Signup">Registrate!</Link></li>
+              <li><Link to="/Login">Inicia sesión</Link></li>
             </ul>
           </nav>
         </div>
@@ -144,7 +156,7 @@ const App = () => {
           <div className="link">
             <h3>lorem</h3>
             <ul>
-              <li><a href="#">lorem</a></li>
+              <li><a href="#"></a></li>
               <li><a href="#">lorem</a></li>
               <li><a href="#">lorem</a></li>
               <li><a href="#">lorem</a></li>
@@ -183,4 +195,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default IndexWeb;
