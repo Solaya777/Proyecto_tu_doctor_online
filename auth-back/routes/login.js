@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { jsonResponse } = require('../lib/jsonResponse');
 const User = require("../schema/user");
+const getUserInfo =require("../lib/getUserinfo");
 
 router.post("/", async (req, res) => {
     const { username, password } = req.body; // Asegúrate de que los campos son los necesarios para el signup
@@ -20,10 +21,9 @@ router.post("/", async (req, res) => {
             // Autenticar usuario
             const correctPassword = await user.comparePassword(password, user.password);
             if(correctPassword){
-
-                const accessToken = "access_token";
-                const refreshToken = "refresh_token";
-                res.status(200).json(jsonResponse(200, { user, accessToken, refreshToken }));
+                const accessToken = user.createAccessToken();
+                //const refreshToken = await user.createRefreshToken();
+                res.status(200).json(jsonResponse(200, { user: getUserInfo(user), accessToken }));
             }else{
                 res.status(400).json(jsonResponse(400, {
                     error: "User or password incorrect",

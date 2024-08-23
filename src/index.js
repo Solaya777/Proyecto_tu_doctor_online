@@ -9,6 +9,13 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AppointmentScheduling } from './components/AppointmentScheduling';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free';
+import 'bootstrap/dist/js/bootstrap.bundle';
+//import Adminpanel from './components/Adminpanel';
+//import userFrom from './components/UserForm';
+
+
 // Elimina estas importaciones duplicadas
 // import { useContext, createContext, useState } from "react";
 
@@ -21,6 +28,8 @@ const router = createBrowserRouter([
       { path: "Login", element: <Login/> }, // Página de login
       { path: "Signup", element: <Signup/> }, // Página de registro
       { path: "IndexWeb2", element:<IndexWeb2/>}, //Apartado de la página principal
+      //{ path: "AdminPanel", element: <Adminpanel/>},
+      //{ path: "UserForm", element: <userForm/>},
       {
         path: "/",
         element: <ProtectedRoute />,

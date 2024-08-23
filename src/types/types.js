@@ -40,13 +40,17 @@ function processAuthResponse(response) {
  * Maneja un error de autenticación.
  * @param {AuthResponseError} error - El error de autenticación.
  */
+
 function handleAuthError(error) {
-    if (error && error.body) {
-        console.error(error.body.error); // Imprime el mensaje de error
+    if (error && error.body && error.body.error) {
+        console.error(`Error: ${error.body.error}`); // Imprime el mensaje de error
+    } else if (error && error.message) {
+        console.error(`Error: ${error.message}`); // Imprime el mensaje de error si está en error.message
     } else {
-        console.error('Invalid error format'); // Manejo de error si el formato es inválido
+        console.error('Unknown error format'); // Manejo de error si el formato es inválido
     }
 }
+
 
 // Ejemplo de objetos
 const user = {

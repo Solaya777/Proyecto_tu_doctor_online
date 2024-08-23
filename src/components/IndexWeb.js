@@ -34,7 +34,7 @@ const IndexWeb = () => {
           <nav className="navbar">
             <ul>
               <li><a href="#">Inicio</a></li>
-              <li><a href="#">Servicios</a></li>
+              <li><a href="#services">Servicios</a></li>
               <li><Link to="/IndexWeb2" href="#">Acerca de nosotros </Link></li>
               <li><Link to="/Signup">Registrate!</Link></li>
               <li><Link to="/Login">Inicia sesión</Link></li>

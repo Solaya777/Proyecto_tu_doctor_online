@@ -25,31 +25,37 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const response = await fetch(`${API_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          username,
-          password
-        })
-      });
+        const response = await fetch(`${API_URL}/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                username,
+                password
+            })
+        });
 
-      if (response.ok) {
-        console.log("Login successful");
-        setErrorResponse("");
+        if (response.ok) {
+            console.log("Login successful");
+            const json = await response.json();
+            console.log(json); // Verifica el formato del JSON
 
-        goTo("/Login");
-      } else {
-        const json = await response.json();
-        setErrorResponse(json.body.error || "Unknown error occurred");
-      }
+            if (json.body.accessToken && json.body.refreshToken) {
+                auth.saveUser(json.body); // Asegúrate de pasar solo el cuerpo
+                goTo("./AppointmentScheduling");
+            } else {
+                setErrorResponse("Tokens not found in response");
+            }
+        } else {
+            const json = await response.json();
+            setErrorResponse(json.body.error || "Unknown error occurred");
+        }
     } catch (error) {
-      console.error("Error during fetch:", error);
-      setErrorResponse("Network error occurred");
+        console.error("Error during fetch:", error);
+        setErrorResponse("Network error occurred");
     }
-  }
+}
 
 
 
