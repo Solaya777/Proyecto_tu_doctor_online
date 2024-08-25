@@ -12,12 +12,29 @@ import { AppointmentScheduling } from './components/AppointmentScheduling';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free';
 import 'bootstrap/dist/js/bootstrap.bundle';
+import Navbar from './components/Navbar';
+import RegistrarUsuario from './components/RegistrarUsuario';
+import SeePersons from './components/SeePersons';
 //import Adminpanel from './components/Adminpanel';
 //import userFrom from './components/UserForm';
 
 
 // Elimina estas importaciones duplicadas
 // import { useContext, createContext, useState } from "react";
+
+const RegistrarUsuarioWithNavbar = () => (
+  <>
+    <Navbar/>
+    <RegistrarUsuario />
+  </>
+);
+
+const SeePersonsWithNavbar =() =>(
+  <>
+  <Navbar/>
+  <SeePersons/>
+  </>
+)
 
 const router = createBrowserRouter([
   {
@@ -28,8 +45,9 @@ const router = createBrowserRouter([
       { path: "Login", element: <Login/> }, // Página de login
       { path: "Signup", element: <Signup/> }, // Página de registro
       { path: "IndexWeb2", element:<IndexWeb2/>}, //Apartado de la página principal
-      //{ path: "AdminPanel", element: <Adminpanel/>},
-      //{ path: "UserForm", element: <userForm/>},
+      { path: "Navbar", element:<Navbar/>},
+      { path: "RegistrarUsuario", element: <RegistrarUsuarioWithNavbar /> },
+      { path: "SeePersons", element: <SeePersonsWithNavbar /> },
       {
         path: "/",
         element: <ProtectedRoute />,

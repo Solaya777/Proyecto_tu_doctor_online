@@ -1,7 +1,6 @@
 import React from 'react';
 import '../css/style.css';
 import '../css/sweetalert.css';
-import '../css/bootstrap.min.css';
 import '../css/atlantis.min.css';
 import { useState } from 'react';
 import { useAuth } from '../auth/AuthProvider'

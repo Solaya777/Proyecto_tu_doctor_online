@@ -26,8 +26,8 @@ export default function IndexWeb2() {
               <li><Link to="/">Inicio</Link></li>
               <li><Link to="/">Servicios</Link></li>
               <li><Link to="/IndexWeb2">Acerca de nosotros</Link></li>
-              <li><Link to="/login">Registrate!</Link></li>
-              <li><Link to="/signup">Inicia sesión</Link></li>
+              <li><Link to="/signup">Registrate!</Link></li>
+              <li><Link to="/login">Inicia sesión</Link></li>
             </ul>
           </nav>
         </div>

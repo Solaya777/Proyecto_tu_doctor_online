@@ -12,6 +12,13 @@ export const AuthProvider = ({ children }) => {
     const [accessToken, setAccessToken] = useState("");
     //const [refreshToken, setRefreshToken] = useState("");
 
+    async function checkAuth(){
+        if(accessToken){
+            //el usuario está autenticado
+        }else{
+            //el usuairio no está autenticado
+        }
+    }
     function getAccessToken(){
         return accessToken;
     }
@@ -21,14 +28,15 @@ export const AuthProvider = ({ children }) => {
     }
     
 
-    function saveUser(userData){
-        setAccessToken(userData.body.accessToken);
-        //setRefreshToken(userData.body.refreshToken);
-
-        localStorage.setItem("Token",userData.body.refreshToken);
-        localStorage.setItem("refreshToken", userData.body.refreshToken);
+    function saveUser(userData) {
+        setAccessToken(userData.accessToken);
+        // setRefreshToken(userData.refreshToken); // Si decides manejarlo
+    
+        localStorage.setItem("Token", userData.accessToken);
+        // localStorage.setItem("refreshToken", userData.refreshToken);
         setIsAuthenticated(true);
     }
+    
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, getAccessToken, saveUser }}>
