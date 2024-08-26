@@ -22,8 +22,8 @@ router.post("/", async (req, res) => {
             const correctPassword = await user.comparePassword(password, user.password);
             if(correctPassword){
                 const accessToken = user.createAccessToken();
-                //const refreshToken = await user.createRefreshToken();
-                res.status(200).json(jsonResponse(200, { user: getUserInfo(user), accessToken }));
+                const refreshToken = await user.createRefreshToken();
+                res.status(200).json(jsonResponse(200, { user: getUserInfo(user), accessToken, refreshToken }));
             }else{
                 res.status(400).json(jsonResponse(400, {
                     error: "User or password incorrect",

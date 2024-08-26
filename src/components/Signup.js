@@ -4,9 +4,10 @@ import '../css/sweetalert.css';
 import '../css/atlantis.min.css';
 import { useState } from 'react';
 import { useAuth } from '../auth/AuthProvider'
-import {Navigate} from 'react';
+import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import {API_URL} from '../auth/constants';
+import bg_doctora from '../images/bg_doctora.png';
 
 export default function Signup() {
   const [name, setName] = useState("");
@@ -60,10 +61,9 @@ export default function Signup() {
   <title>Registrate</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/sweetalert.css" />
-  {/*  <img class="wave"src="../assets/img/wave.png" alt="">  */}
   <div className="contenedor">
     <div className="img">
-      <img src="assets/img/bg.svg" alt="" />
+      <img src= {bg_doctora} alt="" />
     </div>
     <div className="contenido-login">
       <form className="form" id="formulario_registro" onSubmit={handleSubmit} >
