@@ -7,12 +7,15 @@ const AuthContext = createContext({
     getAccessToken: () => {},
     saveUser: (userData) => {},
     getRefreshToken: () => {},
+    getUser: () => {},
+    signOut: () => {},
 });
 
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [accessToken, setAccessToken] = useState(localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")).accessToken : "");
     const [user, setUser] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         checkAuth();
@@ -69,19 +72,43 @@ export const AuthProvider = ({ children }) => {
     async function checkAuth() {
         const token = getRefreshToken();
         if (accessToken) {
-            setIsAuthenticated(true);
+            try {
+                const userInfo = await getUserInfo(accessToken);
+                if (userInfo) {
+                    saveSessionInfo(userInfo, accessToken, getRefreshToken());
+                    setIsLoading(false);
+                    return;
+                }
+                setIsAuthenticated(true);
+            } catch (error) {
+                console.error('Error fetching user info:', error);
+                setIsLoading(false);
+            }
         } else {
-            const token = getRefreshToken();
             if (token) {
-                const newAccessToken = await requestNewAccessToken(token);
-                if (newAccessToken) {
-                    const userInfo = await getUserInfo(newAccessToken);
-                    if (userInfo) {
-                        saveSessionInfo(userInfo, newAccessToken, token);
+                try {
+                    const newAccessToken = await requestNewAccessToken(token);
+                    if (newAccessToken) {
+                        const userInfo = await getUserInfo(newAccessToken);
+                        if (userInfo) {
+                            saveSessionInfo(userInfo, newAccessToken, token);
+                            setIsLoading(false);
+                            return;
+                        }
                     }
+                } catch (error) {
+                    console.error('Error requesting new access token:', error);
                 }
             }
         }
+        setIsLoading(false);
+    }
+
+    function signOut(){
+        setIsAuthenticated(false);
+        setAccessToken("");
+        setUser(undefined);
+        localStorage.removeItem("token");
     }
 
     function saveSessionInfo(userInfo, accessToken, refreshToken) {
@@ -118,9 +145,13 @@ export const AuthProvider = ({ children }) => {
         }
     }
 
+    function getUser(){
+        return user;
+    }
+
     return (
-        <AuthContext.Provider value={{ isAuthenticated, getAccessToken, saveUser, getRefreshToken, user }}>
-            {children}
+        <AuthContext.Provider value={{ isAuthenticated, getAccessToken, saveUser, getRefreshToken, getUser, signOut, user }}>
+            {isLoading ? <div>Loading...</div> :children}
         </AuthContext.Provider>
     );
 };
