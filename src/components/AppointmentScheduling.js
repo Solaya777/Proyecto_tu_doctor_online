@@ -5,46 +5,71 @@ import { API_URL } from "../auth/constants";
 import PortalLayout from "../layout/PortalLayout";
 
 export const AppointmentScheduling = () => {
-  const [todos, setTodos] = useState([]);
-  const [title, setTitle] = useState("");
+  const [informacion, setInformacion] = useState([]);
+  const [telefono, setTelefono] = useState("");
+  const [genero, setGenero] = useState("");
+  const [fecha_nacimiento, setFechanacimiento] = useState("");
+  const [fecha_agendamiento, setFechaagendamiento] = useState("");
+  const [motivo_consulta, setMotivoconsulta] = useState("");
+  const [userName, setUserName] = useState("");
+
   const auth = useAuth();
   const user = auth.getUser();
 
   useEffect(() => {
-    loadTodos();
+    if (user) {
+      setUserName(user.name); 
+    }
+  }, [user]);
+
+  useEffect(() => {
+    loadInformacion();
   }, []);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    await createTodo();
+    await createInformacion();
   }
 
-  async function createTodo() {
+  async function createInformacion() {
     try {
-      const response = await fetch(`${API_URL}/todos`, {
+      const response = await fetch(`${API_URL}/informacion`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${auth.getAccessToken()}`,
         },
-        body: JSON.stringify({ title }),
+        body: JSON.stringify({
+          idUser: user.id,
+          name: user.name,
+          telefono,
+          genero,
+          fecha_nacimiento,
+          fecha_agendamiento,
+          motivo_consulta,
+        }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        setTodos((prevTodos) => [...prevTodos, data]);
-        setTitle(""); // Limpiar el campo de entrada después de agregar
+        setInformacion((prevInformacion) => [...prevInformacion, data]);
+        // Limpiar los campos después de agregar
+        setTelefono("");
+        setGenero("");
+        setFechanacimiento("");
+        setFechaagendamiento("");
+        setMotivoconsulta("");
       } else {
-        console.error('Error al crear todo:', response.statusText);
+        console.error("Error al crear la información:", response.statusText);
       }
     } catch (error) {
-      console.error('Error al crear todo:', error);
+      console.error("Error al crear la información:", error);
     }
   }
 
-  async function loadTodos() {
+  async function loadInformacion() {
     try {
-      const response = await fetch(`${API_URL}/todos`, {
+      const response = await fetch(`${API_URL}/informacion`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${auth.getAccessToken()}`,
@@ -53,65 +78,84 @@ export const AppointmentScheduling = () => {
 
       if (response.ok) {
         const data = await response.json();
-        setTodos(data);
+        setInformacion(data);
       } else {
-        console.error('Error al cargar todos:', response.statusText);
+        console.error("Error al cargar la información:", response.statusText);
       }
     } catch (error) {
-      console.error('Error al cargar todos:', error);
+      console.error("Error al cargar la información:", error);
     }
   }
-
   return (
     <PortalLayout>
-    <div className="form-container">
-      <h2>Formulario de Cita Médica</h2>
-      <form onSubmit={handleSubmit}>
-        <h1>Bienvenido {user?.name || ""}</h1>
-        {todos.map((todo) => (
-          <div key={todo._id}>{todo.title}</div> 
-        ))}
+  <div className="form-container">
+    <h2>Formulario de Cita Médica</h2>
+    <form onSubmit={handleSubmit}>
+      <h1>Bienvenido {user?.name || ""}</h1>
 
+      <div className="form-group">
+        <label htmlFor="telefono">Número de celular:</label>
         <input
+          id="telefono"
           type="text"
-          placeholder="Nuevo todo..."
-          onChange={(e) => setTitle(e.target.value)}
-          value={title}
+          value={telefono}
+          onChange={(e) => setTelefono(e.target.value)}
+          placeholder="Teléfono"
+          required
         />
+      </div>
 
-        <label htmlFor="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required />
-
-        <label htmlFor="apellido">Apellido:</label>
-        <input type="text" id="apellido" name="apellido" required />
-
+      <div className="form-group">
         <label htmlFor="genero">Género:</label>
-        <select id="genero" name="genero" required>
+        <select
+          id="genero"
+          value={genero}
+          onChange={(e) => setGenero(e.target.value)}
+          required
+        >
+          <option value="">Selecciona tu género</option>
           <option value="masculino">Masculino</option>
           <option value="femenino">Femenino</option>
           <option value="otro">Otro</option>
         </select>
+      </div>
 
-        <label htmlFor="telefono">Teléfono:</label>
-        <input type="tel" id="telefono" name="telefono" required />
-
-        <label htmlFor="fecha-nacimiento">Fecha de Nacimiento:</label>
+      <div className="form-group">
+        <label htmlFor="fecha_nacimiento">Fecha de nacimiento:</label>
         <input
+          id="fecha_nacimiento"
           type="date"
-          id="fecha-nacimiento"
-          name="fecha-nacimiento"
+          value={fecha_nacimiento}
+          onChange={(e) => setFechanacimiento(e.target.value)}
           required
         />
+      </div>
 
-        <label htmlFor="fecha-cita">Fecha de Agendamiento de Cita:</label>
-        <input type="date" id="fecha-cita" name="fecha-cita" required />
+      <div className="form-group">
+        <label htmlFor="fecha_agendamiento">Día para agendar tu cita:</label>
+        <input
+          id="fecha_agendamiento"
+          type="date"
+          value={fecha_agendamiento}
+          onChange={(e) => setFechaagendamiento(e.target.value)}
+          required
+        />
+      </div>
 
-        <label htmlFor="motivo">Motivo de Consulta:</label>
-        <textarea id="motivo" name="motivo" rows="4" required></textarea>
+      <div className="form-group">
+        <label htmlFor="motivo_consulta">Motivo de la consulta:</label>
+        <input
+          id="motivo_consulta"
+          type="text"
+          value={motivo_consulta}
+          onChange={(e) => setMotivoconsulta(e.target.value)}
+          required
+        />
+      </div>
 
-        <button type="submit">Agendar Cita</button>
-      </form>
-    </div>
-    </PortalLayout>
+      <button type="submit">Agendar Cita</button>
+    </form>
+  </div>
+</PortalLayout>
   );
 };

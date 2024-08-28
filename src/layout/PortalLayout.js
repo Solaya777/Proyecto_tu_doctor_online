@@ -1,6 +1,6 @@
 import React from "react";
 import { useAuth } from "../auth/AuthProvider";
-import "../css/style.css";
+import "../css/PortalLayout.css";
 import { Link } from 'react-router-dom';
 import { API_URL } from "../auth/constants";
 
@@ -31,11 +31,11 @@ export default function PortalLayout({ children }) {
         <ul>
           <li>
             <Link to="/AppointmentScheduling">
-              Dashboard
+              Agendar cita Médica
             </Link>
           </li>
           <li>
-            <Link to="/me">Profile</Link>
+            <Link to="/Navbar">Historial de citas</Link>
           </li>
           <li>
             <Link to="/Login">Inicia sesión</Link>

@@ -1,0 +1,43 @@
+.navbar-container {
+    background-color: #333; /* Fondo oscuro para la barra de navegación */
+    padding: 0 20px;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between; /* Alinea los elementos a los extremos */
+    align-items: center;
+    padding: 10px 0;
+  }
+  
+  .navbar ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navbar ul li {
+    position: relative;
+    margin-left: 20px;
+  }
+  
+  .navbar ul li a {
+    font-size: 15px;
+    padding: 10px;
+    color: #000000;
+    display: block;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    text-decoration: none; /* Elimina el subrayado de los enlaces */
+  }
+  
+  .navbar ul li a:hover {
+    color: #9b3a91; /* Color al pasar el ratón */
+  }
+  
+  /* Opcional: Si quieres agregar algún estilo adicional a la barra de navegación */
+  .navbar-container {
+    border-bottom: 2px solid #9b3a91; /* Línea decorativa en la parte inferior */
+  }
+  

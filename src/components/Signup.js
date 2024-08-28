@@ -76,7 +76,7 @@ export default function Signup() {
           </div>
           <div className="div">
             <input type="text" value={name} onChange={(e) => setName(e.target.value)} 
-              name="name" required placeholder="Nombre" />
+              name="name" required placeholder="Nombres y apellidos" />
           </div>
         </div>
         <div className="input-div nit">

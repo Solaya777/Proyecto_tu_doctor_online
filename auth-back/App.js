@@ -21,7 +21,7 @@ main().catch(console.error)
 app.use('/api/signup', require('./routes/signup'));
 app.use('/api/login', require('./routes/login'));
 app.use('/api/user', authenticate, require('./routes/user'));
-app.use('/api/todos', authenticate, require('./routes/todos'));
+app.use('/api/informacion', authenticate, require('./routes/informacion'));
 app.use('/api/signout', require('./routes/signout'));
 app.use('/api/refresh-token', require('./routes/refreshToken'));
 

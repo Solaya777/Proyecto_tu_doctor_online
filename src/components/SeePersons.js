@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {API_URL} from '../auth/constants';
 
-function BasicSearch() {
+const VerPersonas = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Fetch the data from the API
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`${API_URL}/informacion`); // Cambia esta URL según sea necesario
+        const result = await response.json();
+        setData(result);
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const theme = createTheme({
     direction: 'ltr', // o 'rtl' dependiendo del idioma
   });
@@ -10,21 +28,16 @@ function BasicSearch() {
   return (
     <ThemeProvider theme={theme}>
       <MaterialTable
-        title="Basic Search Preview"
+        title="Historial de Citas médicas por persona"
         columns={[
-          { title: 'Name', field: 'name' },
-          { title: 'Surname', field: 'surname' },
-          { title: 'Birth Year', field: 'birthYear', type: 'numeric' },
-          {
-            title: 'Birth Place',
-            field: 'birthCity',
-            lookup: { 34: 'İstanbul', 63: 'Şanlıurfa' },
-          },
+          { title: 'Nombre', field: 'name' },
+          { title: 'Teléfono', field: 'telefono', type: 'numeric' },
+          { title: 'Género', field: 'genero' },
+          { title: 'Fecha de Nacimiento', field: 'fecha_nacimiento', type: 'date' },
+          { title: 'Fecha de Agendamiento', field: 'fecha_agendamiento', type: 'date' },
+          { title: 'Motivo de Consulta', field: 'motivo_consulta' },
         ]}
-        data={[
-          { name: 'Mehmet', surname: 'Baran', birthYear: 1987, birthCity: 63 },
-          { name: 'Zerya Betül', surname: 'Baran', birthYear: 2017, birthCity: 34 },
-        ]}
+        data={data}
         options={{
           search: true,
           sorting: true,
@@ -32,6 +45,6 @@ function BasicSearch() {
       />
     </ThemeProvider>
   );
-}
+};
 
-export default BasicSearch;
+export default VerPersonas;

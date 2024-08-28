@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 const bcrypt = require("bcrypt");
 const{
     generateAccessToken,
@@ -12,6 +13,8 @@ const UserSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true},
     password: {type: String, required: true},
     name: {type: String, required: true},
+
+    informacion: { type: Schema.Types.ObjectId, ref: 'Informacion' }
 });
 
 UserSchema.pre('save', function(next){
