@@ -14,7 +14,8 @@ import '@fortawesome/fontawesome-free';
 import 'bootstrap/dist/js/bootstrap.bundle';
 import Navbar from './components/Navbar';
 import RegistrarUsuario from './components/RegistrarUsuario';
-import SeePersons from './components/SeePersons';
+import VerCitas from './components/VerCitas';
+import DashBoardUsuario from './components/DashBoardUsuario';
 //import Adminpanel from './components/Adminpanel';
 //import userFrom from './components/UserForm';
 
@@ -29,10 +30,10 @@ const RegistrarUsuarioWithNavbar = () => (
   </>
 );
 
-const SeePersonsWithNavbar =() =>(
+const VerCitasWithNavbar =() =>(
   <>
   <Navbar/>
-  <SeePersons/>
+  <VerCitas/>
   </>
 )
 
@@ -47,7 +48,8 @@ const router = createBrowserRouter([
       { path: "IndexWeb2", element:<IndexWeb2/>}, //Apartado de la página principal
       { path: "Navbar", element:<Navbar/>},
       { path: "RegistrarUsuario", element: <RegistrarUsuarioWithNavbar /> },
-      { path: "SeePersons", element: <SeePersonsWithNavbar /> },
+      { path: "VerCitas", element: <VerCitasWithNavbar /> },
+      { path: "DashBoardUsuario", element: <DashBoardUsuario /> },
       {
         path: "/",
         element: <ProtectedRoute />,

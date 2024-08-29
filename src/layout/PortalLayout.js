@@ -35,7 +35,7 @@ export default function PortalLayout({ children }) {
             </Link>
           </li>
           <li>
-            <Link to="/Navbar">Historial de citas</Link>
+            <Link to="/DashBoardUsuario">Historial de citas</Link>
           </li>
           <li>
             <Link to="/Login">Inicia sesión</Link>
